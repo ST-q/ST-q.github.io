@@ -14,7 +14,7 @@ export const profile = {
     "Master's student at Zhejiang University researching multi-agent cooperative computing systems.",
   avatar: '/profile.jpg',
   email: 'Zmw-01@outlook.com',
-  github: 'https://github.com/tutuwang028-creator',
+  github: 'https://github.com/ST-q',
   about:
     "I'm a master's student at Zhejiang University, researching multi-agent cooperative computing systems. My background is in automation, spanning embedded control (microcontrollers, motor drivers, PID), robotics software (ROS), containerized services (Docker, K3s), and edge inference deployment. I'm comfortable working across the stack, from hardware to infrastructure.",
 };
