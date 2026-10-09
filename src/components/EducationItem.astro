@@ -1,0 +1,16 @@
+---
+import type { Education } from '../data/profile';
+
+type Props = Education;
+
+const { school, degree, college, period, research } = Astro.props;
+---
+
+<li class="edu">
+  <div class="edu-head">
+    <h3>{school}</h3>
+    <span class="period">{period}</span>
+  </div>
+  <p class="degree">{degree} · {college}</p>
+  {research && <p class="research">Research: {research}</p>}
+</li>

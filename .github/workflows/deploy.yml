@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Deploy on every push to main. Change the branch name if yours is different.
+  push:
+    branches: [main]
+  # Allows running the workflow manually from the Actions tab.
+  workflow_dispatch:
+
+# Permissions required to deploy to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Queue deployments instead of cancelling one that is already running
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Stop if the username placeholder is still present
+        run: |
+          if grep -rn "{{GITHUB_USERNAME}}" src astro.config.mjs; then
+            echo "::error::Replace {{GITHUB_USERNAME}} in astro.config.mjs and src/data/profile.ts with your GitHub username."
+            exit 1
+          fi
+
+      - name: Install, build and upload site
+        uses: withastro/action@v6
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

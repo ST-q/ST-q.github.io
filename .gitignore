@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# build output and Astro cache
+dist/
+.astro/
+
+# logs
+npm-debug.log*
+*.log
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
